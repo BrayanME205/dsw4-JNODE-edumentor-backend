@@ -1,0 +1,32 @@
+# Especificación OpenAPI 3.0 — EduMentor Hub (REQ-03, responsable: Dev 3)
+# Plantilla inicial: se completa endpoint por endpoint a medida que se definen los REQ.
+openapi: 3.0.3
+info:
+  title: EduMentor Hub API
+  version: 0.0.1
+  description: API REST de tutorías académicas entre pares y gestión docente.
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: Auth
+  - name: Materias
+  - name: Disponibilidad
+  - name: Sesiones
+  - name: Recursos
+  - name: Evaluaciones
+paths: {}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ProblemDetail:
+      type: object
+      description: Error conforme a RFC 7807
+      properties:
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
