@@ -1,0 +1,77 @@
+<mxfile host="Electron" agent="Claude">
+  <diagram name="ERD EduMentor Hub" id="erd-edumentor">
+    <mxGraphModel dx="1837" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="USUARIO" vertex="1">
+          <mxGeometry height="210" width="310" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="e2" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;UK carne : VARCHAR NOT NULL&lt;br&gt;UK email : VARCHAR NOT NULL&lt;br&gt;   password_hash : VARCHAR NOT NULL&lt;br&gt;   nombre : VARCHAR NOT NULL&lt;br&gt;   apellido : VARCHAR NOT NULL&lt;br&gt;   rol : VARCHAR NOT NULL&lt;br&gt;   promedio_calificacion : DECIMAL DEFAULT 0&lt;br&gt;   total_evaluaciones : INT DEFAULT 0" vertex="1">
+          <mxGeometry height="178" width="310" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="MATERIA" vertex="1">
+          <mxGeometry height="132" width="280" x="720" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="e4" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;UK codigo_materia : VARCHAR NOT NULL&lt;br&gt;   nombre_materia : VARCHAR NOT NULL&lt;br&gt;   carrera : VARCHAR NOT NULL&lt;br&gt;   creditos : INT NOT NULL" vertex="1">
+          <mxGeometry height="102" width="280" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="DISPONIBILIDAD_TUTOR" vertex="1">
+          <mxGeometry height="150" width="280" x="40" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="e6" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK tutor_id : BIGINT -&gt; usuario.id&lt;br&gt;   dia_semana : VARCHAR NOT NULL&lt;br&gt;   hora_inicio : TIME NOT NULL&lt;br&gt;   hora_fin : TIME NOT NULL&lt;br&gt;   esta_activo : BOOLEAN DEFAULT TRUE" vertex="1">
+          <mxGeometry height="120" width="280" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="SESION_TUTORIA" vertex="1">
+          <mxGeometry height="222" width="310" x="360" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" parent="e8" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK estudiante_id : BIGINT -&gt; usuario.id&lt;br&gt;FK tutor_id : BIGINT -&gt; usuario.id&lt;br&gt;FK materia_id : BIGINT -&gt; materia.id&lt;br&gt;   fecha_hora : DATETIME NOT NULL&lt;br&gt;   duracion_minutos : INT NOT NULL&lt;br&gt;   fecha_hora_fin : DATETIME NOT NULL&lt;br&gt;   estado : VARCHAR NOT NULL&lt;br&gt;   modalidad : VARCHAR NOT NULL&lt;br&gt;   resumen_trabajo : VARCHAR NULL" vertex="1">
+          <mxGeometry height="192" width="280" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="RECURSO_ESTUDIO" vertex="1">
+          <mxGeometry height="134" width="320" x="720" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" parent="e10" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK sesion_id : BIGINT -&gt; sesion_tutoria.id&lt;br&gt;   titulo : VARCHAR NOT NULL&lt;br&gt;   url_recurso : VARCHAR NOT NULL&lt;br&gt;   tipo_archivo : VARCHAR NULL" vertex="1">
+          <mxGeometry height="102" width="320" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="EVALUACION_TUTORIA" vertex="1">
+          <mxGeometry height="134" width="370" x="380" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" parent="e12" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK UK sesion_id : BIGINT -&gt; sesion_tutoria.id&lt;br&gt;   calificacion_estrellas : INT NOT NULL, CHECK 1..5&lt;br&gt;   comentario : VARCHAR NULL&lt;br&gt;   fecha_evaluacion : DATETIME NOT NULL" vertex="1">
+          <mxGeometry height="102" width="370" y="32" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e6" value="1 : N">
+          <mxGeometry relative="1" x="0.0889" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="325" />
+              <mxPoint x="180" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="estudiante (1 : N)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="tutor (1 : N)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="515" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="1 : N">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="106" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e10" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToOne;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e12" value="1 : 1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
