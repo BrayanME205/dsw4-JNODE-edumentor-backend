@@ -1,74 +1,72 @@
-<mxfile host="Electron" agent="Claude">
+<mxfile host="Electron">
   <diagram name="ERD EduMentor Hub" id="erd-edumentor">
-    <mxGraphModel dx="1837" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="2221" dy="916" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1520" pageHeight="900" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="e2" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="USUARIO" vertex="1">
-          <mxGeometry height="210" width="310" x="40" y="40" as="geometry" />
+        <mxCell id="t1" parent="1" style="text;html=1;fontSize=18;fontStyle=1;align=left;verticalAlign=middle;" value="EduMentor Hub — Modelo Entidad-Relación (REQ-01)" vertex="1">
+          <mxGeometry height="30" width="600" x="40" as="geometry" />
         </mxCell>
-        <mxCell id="e3" parent="e2" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;UK carne : VARCHAR NOT NULL&lt;br&gt;UK email : VARCHAR NOT NULL&lt;br&gt;   password_hash : VARCHAR NOT NULL&lt;br&gt;   nombre : VARCHAR NOT NULL&lt;br&gt;   apellido : VARCHAR NOT NULL&lt;br&gt;   rol : VARCHAR NOT NULL&lt;br&gt;   promedio_calificacion : DECIMAL DEFAULT 0&lt;br&gt;   total_evaluaciones : INT DEFAULT 0" vertex="1">
-          <mxGeometry height="178" width="310" y="32" as="geometry" />
+        <mxCell id="u" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="USUARIO" vertex="1">
+          <mxGeometry height="208" width="440" x="40" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="e4" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="MATERIA" vertex="1">
-          <mxGeometry height="132" width="280" x="720" y="40" as="geometry" />
+        <mxCell id="ut" parent="u" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;UK carne : VARCHAR(20) NOT NULL&lt;br&gt;UK email : VARCHAR(150) NOT NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;password_hash&amp;nbsp;:&amp;nbsp;VARCHAR(255)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;nombre&amp;nbsp;:&amp;nbsp;VARCHAR(100)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;apellido&amp;nbsp;:&amp;nbsp;VARCHAR(100)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;rol&amp;nbsp;:&amp;nbsp;VARCHAR(20)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;promedio_calificacion&amp;nbsp;:&amp;nbsp;DECIMAL(3,2)&amp;nbsp;NOT&amp;nbsp;NULL&amp;nbsp;DEFAULT&amp;nbsp;0&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;total_evaluaciones&amp;nbsp;:&amp;nbsp;INT&amp;nbsp;NOT&amp;nbsp;NULL&amp;nbsp;DEFAULT&amp;nbsp;0" vertex="1">
+          <mxGeometry height="178" width="440" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e5" parent="e4" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;UK codigo_materia : VARCHAR NOT NULL&lt;br&gt;   nombre_materia : VARCHAR NOT NULL&lt;br&gt;   carrera : VARCHAR NOT NULL&lt;br&gt;   creditos : INT NOT NULL" vertex="1">
-          <mxGeometry height="102" width="280" y="32" as="geometry" />
+        <mxCell id="m" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="MATERIA" vertex="1">
+          <mxGeometry height="154" width="400" x="990" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="e6" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="DISPONIBILIDAD_TUTOR" vertex="1">
-          <mxGeometry height="150" width="280" x="40" y="400" as="geometry" />
+        <mxCell id="mt" parent="m" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;UK codigo_materia : VARCHAR(10) NOT NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;nombre_materia&amp;nbsp;:&amp;nbsp;VARCHAR(150)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;carrera&amp;nbsp;:&amp;nbsp;VARCHAR(100)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;creditos&amp;nbsp;:&amp;nbsp;INT&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;CHECK (creditos BETWEEN 1 AND 10)" vertex="1">
+          <mxGeometry height="124" width="400" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e7" parent="e6" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK tutor_id : BIGINT -&gt; usuario.id&lt;br&gt;   dia_semana : VARCHAR NOT NULL&lt;br&gt;   hora_inicio : TIME NOT NULL&lt;br&gt;   hora_fin : TIME NOT NULL&lt;br&gt;   esta_activo : BOOLEAN DEFAULT TRUE" vertex="1">
-          <mxGeometry height="120" width="280" y="32" as="geometry" />
+        <mxCell id="d" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="DISPONIBILIDAD_TUTOR" vertex="1">
+          <mxGeometry height="172" width="420" x="40" y="430" as="geometry" />
         </mxCell>
-        <mxCell id="e8" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="SESION_TUTORIA" vertex="1">
-          <mxGeometry height="222" width="310" x="360" y="260" as="geometry" />
+        <mxCell id="dt" parent="d" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;FK tutor_id : BIGINT NOT NULL -&amp;gt; usuario.id&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;dia_semana&amp;nbsp;:&amp;nbsp;VARCHAR(10)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;hora_inicio&amp;nbsp;:&amp;nbsp;TIME&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;hora_fin&amp;nbsp;:&amp;nbsp;TIME&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;esta_activo&amp;nbsp;:&amp;nbsp;BOOLEAN&amp;nbsp;NOT&amp;nbsp;NULL&amp;nbsp;DEFAULT&amp;nbsp;TRUE&lt;br&gt;CHECK (hora_fin &amp;gt; hora_inicio)" vertex="1">
+          <mxGeometry height="142" width="420" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e9" parent="e8" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK estudiante_id : BIGINT -&gt; usuario.id&lt;br&gt;FK tutor_id : BIGINT -&gt; usuario.id&lt;br&gt;FK materia_id : BIGINT -&gt; materia.id&lt;br&gt;   fecha_hora : DATETIME NOT NULL&lt;br&gt;   duracion_minutos : INT NOT NULL&lt;br&gt;   fecha_hora_fin : DATETIME NOT NULL&lt;br&gt;   estado : VARCHAR NOT NULL&lt;br&gt;   modalidad : VARCHAR NOT NULL&lt;br&gt;   resumen_trabajo : VARCHAR NULL" vertex="1">
-          <mxGeometry height="192" width="280" y="32" as="geometry" />
+        <mxCell id="s" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="SESION_TUTORIA" vertex="1">
+          <mxGeometry height="262" width="410" x="610" y="331" as="geometry" />
         </mxCell>
-        <mxCell id="e10" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="RECURSO_ESTUDIO" vertex="1">
-          <mxGeometry height="134" width="320" x="720" y="400" as="geometry" />
+        <mxCell id="st" parent="s" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;FK estudiante_id : BIGINT NOT NULL -&amp;gt; usuario.id&lt;br&gt;FK tutor_id : BIGINT NOT NULL -&amp;gt; usuario.id&lt;br&gt;FK materia_id : BIGINT NOT NULL -&amp;gt; materia.id&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fecha_hora&amp;nbsp;:&amp;nbsp;DATETIME&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;duracion_minutos&amp;nbsp;:&amp;nbsp;INT&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fecha_hora_fin&amp;nbsp;:&amp;nbsp;DATETIME&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;estado&amp;nbsp;:&amp;nbsp;VARCHAR(20)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;modalidad&amp;nbsp;:&amp;nbsp;VARCHAR(20)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;resumen_trabajo&amp;nbsp;:&amp;nbsp;VARCHAR(1000)&amp;nbsp;NULL&lt;br&gt;CHECK (duracion_minutos &amp;gt; 0)&lt;br&gt;CHECK (estudiante_id &amp;lt;&amp;gt; tutor_id)" vertex="1">
+          <mxGeometry height="232" width="410" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e11" parent="e10" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK sesion_id : BIGINT -&gt; sesion_tutoria.id&lt;br&gt;   titulo : VARCHAR NOT NULL&lt;br&gt;   url_recurso : VARCHAR NOT NULL&lt;br&gt;   tipo_archivo : VARCHAR NULL" vertex="1">
-          <mxGeometry height="102" width="320" y="32" as="geometry" />
+        <mxCell id="r" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="RECURSO_ESTUDIO" vertex="1">
+          <mxGeometry height="136" width="430" x="1120" y="400" as="geometry" />
         </mxCell>
-        <mxCell id="e12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" value="EVALUACION_TUTORIA" vertex="1">
-          <mxGeometry height="134" width="370" x="380" y="620" as="geometry" />
+        <mxCell id="rt" parent="r" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;FK sesion_id : BIGINT NOT NULL -&amp;gt; sesion_tutoria.id&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;titulo&amp;nbsp;:&amp;nbsp;VARCHAR(150)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;url_recurso&amp;nbsp;:&amp;nbsp;VARCHAR(500)&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;tipo_archivo&amp;nbsp;:&amp;nbsp;VARCHAR(50)&amp;nbsp;NULL" vertex="1">
+          <mxGeometry height="106" width="430" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e13" parent="e12" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontFamily=Courier New;fontSize=12;" value="PK id : BIGINT&lt;br&gt;FK UK sesion_id : BIGINT -&gt; sesion_tutoria.id&lt;br&gt;   calificacion_estrellas : INT NOT NULL, CHECK 1..5&lt;br&gt;   comentario : VARCHAR NULL&lt;br&gt;   fecha_evaluacion : DATETIME NOT NULL" vertex="1">
-          <mxGeometry height="102" width="370" y="32" as="geometry" />
+        <mxCell id="e" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;startSize=30;html=1;rounded=1;fillColor=light-dark(#DAE8FC,#006633);strokeColor=#6c8ebf;fontSize=13;" value="EVALUACION_TUTORIA" vertex="1">
+          <mxGeometry height="154" width="450" x="540" y="720" as="geometry" />
         </mxCell>
-        <mxCell id="e14" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e6" value="1 : N">
-          <mxGeometry relative="1" x="0.0889" as="geometry">
-            <Array as="points">
-              <mxPoint x="210" y="325" />
-              <mxPoint x="180" y="325" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="et" parent="e" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontFamily=Courier New;fontSize=12;whiteSpace=nowrap;fillColor=light-dark(transparent,#000000);" value="PK id : BIGINT IDENTITY&lt;br&gt;FK UK sesion_id : BIGINT NOT NULL -&amp;gt; sesion_tutoria.id&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;calificacion_estrellas&amp;nbsp;:&amp;nbsp;INT&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;comentario&amp;nbsp;:&amp;nbsp;VARCHAR(500)&amp;nbsp;NULL&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;fecha_evaluacion&amp;nbsp;:&amp;nbsp;DATETIME&amp;nbsp;NOT&amp;nbsp;NULL&lt;br&gt;CHECK (calificacion_estrellas BETWEEN 1 AND 5)" vertex="1">
+          <mxGeometry height="124" width="450" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="e15" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="estudiante (1 : N)">
+        <mxCell id="n1" parent="1" style="shape=note;whiteSpace=nowrap;html=1;backgroundOutline=1;size=16;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;fontFamily=Courier New;fontSize=12;fillColor=light-dark(#FFF2CC,#4D4D4D);strokeColor=#d6b656;" value="&lt;b&gt;ENUMS (guardados como texto)&lt;/b&gt;&lt;br&gt;rol: ESTUDIANTE | TUTOR | COORDINADOR&lt;br&gt;estado: REQUESTED | CONFIRMED | REJECTED |&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;CANCELLED | IN_SESSION | COMPLETED | REVIEWED&lt;br&gt;modalidad: VIRTUAL | PRESENCIAL&lt;br&gt;dia_semana: MONDAY .. SUNDAY (java.time.DayOfWeek)&lt;br&gt;&lt;br&gt;&lt;b&gt;Leyenda:&lt;/b&gt; PK llave primaria · FK llave foránea · UK única" vertex="1">
+          <mxGeometry height="170" width="470" x="1270" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="u" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.2619047619047619;entryY=0;entryDx=0;entryDy=0;" target="d" value="1 : N">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e16" edge="1" parent="1" source="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="tutor (1 : N)">
+        <mxCell id="r2" edge="1" parent="1" source="u" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" target="s" value="estudiante (1 : N)">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="515" y="190" />
+              <mxPoint x="520" y="227" />
+              <mxPoint x="520" y="422" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e17" edge="1" parent="1" source="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e8" value="1 : N">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="560" y="106" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e18" edge="1" parent="1" source="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e10" value="1 : N">
+        <mxCell id="r3" edge="1" parent="1" source="u" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.2926829268292683;entryY=0;entryDx=0;entryDy=0;" target="s" value="tutor (1 : N)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e19" edge="1" parent="1" source="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=ERzeroToOne;startArrow=ERmandOne;startFill=0;endFill=0;endSize=12;startSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;" target="e12" value="1 : 1">
+        <mxCell id="r4" edge="1" parent="1" source="m" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.7317073170731707;entryY=0;entryDx=0;entryDy=0;" target="s" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=1;exitY=0.4961832061068702;exitDx=0;exitDy=0;entryX=0;entryY=0.4411764705882353;entryDx=0;entryDy=0;" target="r" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToOne;startFill=0;endFill=0;startSize=12;endSize=12;strokeWidth=1.5;labelBackgroundColor=#ffffff;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="e" value="1 : 0..1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
