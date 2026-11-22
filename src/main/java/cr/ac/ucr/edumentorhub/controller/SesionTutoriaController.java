@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import cr.ac.ucr.edumentorhub.dto.sesion.FinalizarSesionRequest;
 import cr.ac.ucr.edumentorhub.dto.sesion.SesionResponse;
 import cr.ac.ucr.edumentorhub.dto.sesion.SolicitudSesionRequest;
 import cr.ac.ucr.edumentorhub.service.SesionTutoriaService;
@@ -56,5 +57,24 @@ public class SesionTutoriaController {
     @PreAuthorize("hasRole('TUTOR')")
     public SesionResponse rechazar(@PathVariable Long id, Authentication authentication) {
         return sesionService.rechazar(id, authentication.getName());
+    }
+
+    @PutMapping("/{id}/cancelar")
+    @PreAuthorize("hasAnyRole('ESTUDIANTE', 'TUTOR')")
+    public SesionResponse cancelar(@PathVariable Long id, Authentication authentication) {
+        return sesionService.cancelar(id, authentication.getName());
+    }
+
+    @PutMapping("/{id}/iniciar")
+    @PreAuthorize("hasRole('TUTOR')")
+    public SesionResponse iniciar(@PathVariable Long id, Authentication authentication) {
+        return sesionService.iniciar(id, authentication.getName());
+    }
+
+    @PutMapping("/{id}/finalizar")
+    @PreAuthorize("hasRole('TUTOR')")
+    public SesionResponse finalizar(@PathVariable Long id, @Valid @RequestBody FinalizarSesionRequest request,
+            Authentication authentication) {
+        return sesionService.finalizar(id, authentication.getName(), request);
     }
 }
