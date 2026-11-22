@@ -1,5 +1,6 @@
 package cr.ac.ucr.edumentorhub.service;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cr.ac.ucr.edumentorhub.dto.sesion.FinalizarSesionRequest;
 import cr.ac.ucr.edumentorhub.dto.sesion.SesionResponse;
 import cr.ac.ucr.edumentorhub.dto.sesion.SolicitudSesionRequest;
 import cr.ac.ucr.edumentorhub.entity.EstadoTutoria;
@@ -39,20 +41,25 @@ public class SesionTutoriaService {
     /** Estados que ocupan la agenda y por lo tanto cuentan para detectar traslapes. */
     private static final Set<EstadoTutoria> OCUPAN_AGENDA = Set.of(EstadoTutoria.CONFIRMED, EstadoTutoria.IN_SESSION);
 
+    /** Anticipación mínima para cancelar una sesión confirmada. */
+    private static final int HORAS_MINIMAS_CANCELACION = 2;
+
     private final SesionTutoriaRepository sesionRepository;
     private final UsuarioRepository usuarioRepository;
     private final MateriaRepository materiaRepository;
     private final DisponibilidadTutorRepository disponibilidadRepository;
     private final UsuarioActualService usuarioActualService;
+    private final Clock clock;
 
     public SesionTutoriaService(SesionTutoriaRepository sesionRepository, UsuarioRepository usuarioRepository,
             MateriaRepository materiaRepository, DisponibilidadTutorRepository disponibilidadRepository,
-            UsuarioActualService usuarioActualService) {
+            UsuarioActualService usuarioActualService, Clock clock) {
         this.sesionRepository = sesionRepository;
         this.usuarioRepository = usuarioRepository;
         this.materiaRepository = materiaRepository;
         this.disponibilidadRepository = disponibilidadRepository;
         this.usuarioActualService = usuarioActualService;
+        this.clock = clock;
     }
 
     // ===================== Solicitar =====================
@@ -114,6 +121,73 @@ public class SesionTutoriaService {
 
         sesion.setEstado(EstadoTutoria.REJECTED);
         return SesionMapper.toResponse(sesionRepository.save(sesion));
+    }
+
+    // ===================== Cancelar, iniciar y finalizar =====================
+
+    /**
+     * REQUESTED: solo el estudiante puede desistir (el tutor la rechaza).
+     * CONFIRMED: cualquiera de los dos, con al menos 2 horas de anticipación.
+     */
+    @Transactional
+    public SesionResponse cancelar(Long id, String email) {
+        SesionTutoria sesion = buscar(id);
+        if (!esParticipante(sesion, email)) {
+            throw new AccesoDenegadoNegocioException("Solo los participantes pueden cancelar esta sesión");
+        }
+        validarTransicion(sesion.getEstado(), EstadoTutoria.CANCELLED);
+
+        if (sesion.getEstado() == EstadoTutoria.REQUESTED && !sesion.getEstudiante().getEmail().equals(email)) {
+            throw new AccesoDenegadoNegocioException("El tutor no cancela una solicitud: debe rechazarla");
+        }
+        if (sesion.getEstado() == EstadoTutoria.CONFIRMED) {
+            LocalDateTime limite = sesion.getFechaHora().minusHours(HORAS_MINIMAS_CANCELACION);
+            if (LocalDateTime.now(clock).isAfter(limite)) {
+                throw new ReglaNegocioException("La cancelación requiere al menos 2 horas de anticipación");
+            }
+        }
+
+        sesion.setEstado(EstadoTutoria.CANCELLED);
+        return SesionMapper.toResponse(sesionRepository.save(sesion));
+    }
+
+    /** CONFIRMED -> IN_SESSION, solo cuando ya llegó la hora pactada. */
+    @Transactional
+    public SesionResponse iniciar(Long id, String emailTutor) {
+        SesionTutoria sesion = buscar(id);
+        validarEsTutor(sesion, emailTutor);
+        validarTransicion(sesion.getEstado(), EstadoTutoria.IN_SESSION);
+
+        if (LocalDateTime.now(clock).isBefore(sesion.getFechaHora())) {
+            throw new ReglaNegocioException("La sesión solo puede iniciarse a partir de la hora pactada");
+        }
+
+        sesion.setEstado(EstadoTutoria.IN_SESSION);
+        return SesionMapper.toResponse(sesionRepository.save(sesion));
+    }
+
+    /** IN_SESSION -> COMPLETED, guardando el resumen del trabajo realizado. */
+    @Transactional
+    public SesionResponse finalizar(Long id, String emailTutor, FinalizarSesionRequest request) {
+        SesionTutoria sesion = buscar(id);
+        validarEsTutor(sesion, emailTutor);
+        validarTransicion(sesion.getEstado(), EstadoTutoria.COMPLETED);
+
+        sesion.setResumenTrabajo(request.resumen().trim());
+        sesion.setEstado(EstadoTutoria.COMPLETED);
+        return SesionMapper.toResponse(sesionRepository.save(sesion));
+    }
+
+    /**
+     * COMPLETED -> REVIEWED. Lo llama EvaluacionTutoriaService (REQ-14) dentro de su misma transacción,
+     * después de guardar la evaluación del estudiante.
+     */
+    @Transactional
+    public void marcarRevisada(Long sesionId) {
+        SesionTutoria sesion = buscar(sesionId);
+        validarTransicion(sesion.getEstado(), EstadoTutoria.REVIEWED);
+        sesion.setEstado(EstadoTutoria.REVIEWED);
+        sesionRepository.save(sesion);
     }
 
     // ===================== Consultas =====================
